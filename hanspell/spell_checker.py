@@ -60,7 +60,12 @@ def check(text):
 
     r = r.text[42:-2]
 
-    data = json.loads(r)
+    try:
+        data = json.loads(r)
+    except json.JSONDecodeError:
+        return Checked(result=False)
+
+
     html = data['message']['result']['html']
     result = {
         'result': True,

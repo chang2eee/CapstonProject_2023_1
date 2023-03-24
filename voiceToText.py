@@ -1,7 +1,6 @@
 import speech_recognition as sr
 import os
 import time
-import keyboard
 
 #녹음 시작 함수 
 #녹음이 끝났다고 감지하면, 바로 프로그램이 종료되게 설정
