@@ -1,11 +1,9 @@
 from hanspell import spell_checker
 import kss
-
-text_file = 'ttt.txt'
+text_file = 'example.txt'
 # 파일 읽기
-f = open(text_file, 'r', encoding='UTF-8')
-lines = f.readlines()
-f.close()
+with open(text_file, 'r', encoding='UTF-8') as f:
+    lines = f.readlines()
 
 # 수정된 문장 저장할 리스트 초기화
 new_lines = []
@@ -21,7 +19,6 @@ for line in lines:
     new_lines.extend(spacing_sent)
 
 # 수정된 문장을 파일에 쓰기
-f = open(text_file, 'w', encoding='UTF-8')
-for line in new_lines:
-    f.write(line.strip() + '\n')
-f.close()
+with open(text_file, 'w', encoding='UTF-8') as f:
+    for line in new_lines:
+        f.write(line.strip() + '\n')

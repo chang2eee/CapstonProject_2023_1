@@ -59,63 +59,60 @@ def check(text):
     passed_time = time.time() - start_time
 
     r = r.text[42:-2]
-
     try:
         data = json.loads(r)
-    except json.JSONDecodeError:
-        return Checked(result=False)
-
-
-    html = data['message']['result']['html']
-    result = {
-        'result': True,
-        'original': text,
-        'checked': _remove_tags(html),
-        'errors': data['message']['result']['errata_count'],
-        'time': passed_time,
-        'words': OrderedDict(),
-    }
+        html = data['message']['result']['html']
+        result = {
+            'result': True,
+            'original': text,
+            'checked': _remove_tags(html),
+            'errors': data['message']['result']['errata_count'],
+            'time': passed_time,
+            'words': OrderedDict(),
+        }
 
     # 띄어쓰기로 구분하기 위해 태그는 일단 보기 쉽게 바꿔둠.
     # ElementTree의 iter()를 써서 더 좋게 할 수 있는 방법이 있지만
     # 이 짧은 코드에 굳이 그렇게 할 필요성이 없으므로 일단 문자열을 치환하는 방법으로 작성.
-    html = html.replace('<span class=\'green_text\'>', '<green>') \
-               .replace('<span class=\'red_text\'>', '<red>') \
-               .replace('<span class=\'purple_text\'>', '<purple>') \
-               .replace('<span class=\'blue_text\'>', '<blue>') \
-               .replace('</span>', '<end>')
-    items = html.split(' ')
-    words = []
-    tmp = ''
-    for word in items:
-        if tmp == '' and word[:1] == '<':
-            pos = word.find('>') + 1
-            tmp = word[:pos]
-        elif tmp != '':
-            word = u'{}{}'.format(tmp, word)
+        html = html.replace('<span class=\'green_text\'>', '<green>') \
+                   .replace('<span class=\'red_text\'>', '<red>') \
+                   .replace('<span class=\'purple_text\'>', '<purple>') \
+                   .replace('<span class=\'blue_text\'>', '<blue>') \
+                   .replace('</span>', '<end>')
+        items = html.split(' ')
+        words = []
+        tmp = ''
+        for word in items:
+            if tmp == '' and word[:1] == '<':
+                pos = word.find('>') + 1
+                tmp = word[:pos]
+            elif tmp != '':
+                word = u'{}{}'.format(tmp, word)
         
-        if word[-5:] == '<end>':
-            word = word.replace('<end>', '')
-            tmp = ''
+            if word[-5:] == '<end>':
+                word = word.replace('<end>', '')
+                tmp = ''
 
-        words.append(word)
+            words.append(word)
 
-    for word in words:
-        check_result = CheckResult.PASSED
-        if word[:5] == '<red>':
-            check_result = CheckResult.WRONG_SPELLING
-            word = word.replace('<red>', '')
-        elif word[:7] == '<green>':
-            check_result = CheckResult.WRONG_SPACING
-            word = word.replace('<green>', '')
-        elif word[:8] == '<purple>':
-            check_result = CheckResult.AMBIGUOUS
-            word = word.replace('<purple>', '')
-        elif word[:6] == '<blue>':
-            check_result = CheckResult.STATISTICAL_CORRECTION
-            word = word.replace('<blue>', '')
-        result['words'][word] = check_result
+        for word in words:
+            check_result = CheckResult.PASSED
+            if word[:5] == '<red>':
+                check_result = CheckResult.WRONG_SPELLING
+                word = word.replace('<red>', '')
+            elif word[:7] == '<green>':
+                check_result = CheckResult.WRONG_SPACING
+                word = word.replace('<green>', '')
+            elif word[:8] == '<purple>':
+                check_result = CheckResult.AMBIGUOUS
+                word = word.replace('<purple>', '')
+            elif word[:6] == '<blue>':
+                check_result = CheckResult.STATISTICAL_CORRECTION
+                word = word.replace('<blue>', '')
+            result['words'][word] = check_result
 
-    result = Checked(**result)
+        result = Checked(**result)
 
-    return result
+        return result
+    except json.JSONDecodeError:
+        return Checked(result=False)
