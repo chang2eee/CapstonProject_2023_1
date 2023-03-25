@@ -16,7 +16,7 @@ word_list = contents.split()
 for i, word in enumerate(word_list):
 
     if '|' in word:
-        # |를 기준으로 요소를 분리하여 새로운 리스트에 저장
+        # '|'를 기준으로 요소를 분리하여 새로운 리스트에 저장
         sub_list = word.split('|')
         # 분리된 요소를 기존 리스트에 덮어쓰기
         word_list[i:i+1] = sub_list
