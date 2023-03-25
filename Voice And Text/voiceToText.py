@@ -5,7 +5,7 @@ import speech_recognition as sr
 import os
 import time
 
-text_file = "myInterview.txt"
+text_file = 'Code\Voice And Text\myInterview.txt'
 
 #startRecord 함수는 runningTime을 반환하는 동시에 녹음의 기능까지 하는 함수
 def startRecord():
@@ -24,8 +24,8 @@ def startRecord():
         print("인식 결과 : " + text)
 
         #텍스트 파일에 결과 추가
-        with open(text_file, 'a', encoding='UTF-8') as f:
-            f.write(text + "\n")
+        with open(text_file, 'a', encoding='UTF-8') as file:
+            file.write(text + "\n")
         
         end_time = time.time()
         runningTime = end_time - start_time

@@ -1,23 +1,30 @@
-# 키워드를 찾아서 나오는 횟수를 출력하는 프로그램이다.
+# 가장 많이 언급되는 keyword를 내림차순으로 반환한다.
 
-text_file = 'myInterview.txt'
+text_file = 'Code\Voice And Text\myInterview.txt'
 
-# 가장 많이 언급된 keyword 하나 찾아서 반환하는 함수
-def find_most_frequent_keyword(text_file, keyword_list):
-    with open(text_file, 'r', encoding='UTF-8') as file:
-        found_keyword = {keyword: 0 for keyword in keyword_list}  # 초기값 0으로 설정
-        for line in file:
-            for keyword in keyword_list:
-                if keyword in line:
-                    found_keyword[keyword] += 1  # 해당 키워드가 찾아질 때마다 count 증가
-                    break
+# 파일 읽어오기
+with open(text_file, 'r', encoding='utf-8') as f:
+    interview_text = f.read()
 
-    most_frequent_keyword = max(found_keyword, key=found_keyword.get) # 가장 많이 나온 keyword 만 반환한다. 
-    return most_frequent_keyword
+# interview_words 리스트 생성 : 띄어쓰기 기준으로 list화 한다.
+interview_words = interview_text.split()
 
-# keyword_list 안에 우리가 DB 테이블 명을 넣으면 된다.
-keyword_list = ['네트워크', '데이터베이스', '딥러닝', '머신러닝', '소프트웨어공학',
-                '알고리즘', '운영체제', '지료구조', '정보보안', '코딩', '통계수학']   
+# 키워드와 카운트 값을 저장할 딕셔너리 생성
+keyword_list = {'네트워크': 0, '데이터베이스': 0, '딥러닝': 0, 
+                '머신러닝': 0, '소프트웨어공학': 0, '알고리즘': 0, 
+                '운영체제': 0, '자료구조': 0, '정보보안': 0, 
+                '코딩': 0, '통계수학': 0}
 
-result = find_most_frequent_keyword(text_file, keyword_list)
-print(result)
+# 키워드 리스트 생성
+keywords = list(keyword_list.keys())
+
+# 텍스트 파일 내의 단어들과 키워드 리스트를 비교하여 키워드 카운트
+for word in interview_words:
+    if word in keywords:
+        keyword_list[word] += 1
+
+# 키워드 리스트를 해당 키워드의 카운트 값에 따라 내림차순으로 정렬하여 반환
+sorted_index = sorted(range(len(keyword_list)), key=lambda k: keyword_list[keywords[k]], reverse=True)
+sorted_keywords = [keywords[i] for i in sorted_index]
+
+print(sorted_keywords)

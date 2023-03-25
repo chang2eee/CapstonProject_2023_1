@@ -4,11 +4,11 @@
 from hanspell import spell_checker
 import kss
 
-text_file = 'myInterview.txt'
+text_file = 'Code\Voice And Text\myInterview.txt'
 
 # 파일 읽기
-with open(text_file, 'r', encoding='UTF-8') as f:
-    lines = f.readlines()
+with open(text_file, 'r', encoding='UTF-8') as file:
+    lines = file.readlines()
 
 # 수정된 문장 저장할 리스트 초기화
 new_lines = []
@@ -24,6 +24,6 @@ for line in lines:
     new_lines.extend(spacing_sent)
 
 # 수정된 문장을 파일에 쓰기
-with open(text_file, 'w', encoding='UTF-8') as f:
+with open(text_file, 'w', encoding='UTF-8') as file:
     for line in new_lines:
-        f.write(line.strip() + '\n')
+        file.write(line.strip() + '\n')
