@@ -1,6 +1,6 @@
 import speech_recognition as sr
 
-#*.mp3 -> *.txt
+# *.mp3 -> *.txt
 def convertToText(audio_file):
     r = sr.Recognizer()
     audio = sr.AudioFile(audio_file)
