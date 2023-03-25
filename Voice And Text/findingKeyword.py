@@ -3,7 +3,7 @@
 text_file = 'Code\Voice And Text\myInterview.txt'
 
 # 파일 읽어오기
-with open(text_file, 'r', encoding='utf-8') as f:
+with open(text_file, 'r', encoding='UTF-8') as f:
     interview_text = f.read()
 
 # interview_words 리스트 생성 : 띄어쓰기 기준으로 list화 한다.
