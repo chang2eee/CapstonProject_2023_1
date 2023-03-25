@@ -1,6 +1,8 @@
 from hanspell import spell_checker
 import kss
-text_file = 'example.txt'
+
+text_file = 'myInterview.txt'
+
 # 파일 읽기
 with open(text_file, 'r', encoding='UTF-8') as f:
     lines = f.readlines()
