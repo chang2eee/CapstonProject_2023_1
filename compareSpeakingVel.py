@@ -1,3 +1,5 @@
+# 말하기 속도를 비교하는 프로그램이다.
+
 from voiceToText import *
 from wordCount import *
 

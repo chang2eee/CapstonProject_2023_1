@@ -1,3 +1,6 @@
+# 오타 및 띄어쓰기 교정 프로그램
+# hanspell 오류로 더 이상 쓰지 않을 예정
+
 from hanspell import spell_checker
 import kss
 
