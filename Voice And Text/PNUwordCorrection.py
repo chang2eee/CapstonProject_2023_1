@@ -29,5 +29,5 @@ for err in data['errInfo']:
     corrected_text = corrected_text.replace(err['orgStr'], err['candWord'])
 
 # 교정된 텍스트를 출력 파일에 쓰기
-with open(text_file, 'w', encoding='utf-8') as file:
+with open(text_file, 'w', encoding='UTF-8') as file:
     file.write(corrected_text)
