@@ -1,9 +1,9 @@
-# 한국어 맞춤법 검사기 API URL
 # 인터넷 찾아보니 신뢰성 높은 것 중 하나
 
 import requests
 import json
 
+# 한국어 맞춤법 검사기 API URL
 CHECKER_URL = 'http://164.125.7.61/speller/results'
 
 # 입력 파일과 출력 파일의 이름
