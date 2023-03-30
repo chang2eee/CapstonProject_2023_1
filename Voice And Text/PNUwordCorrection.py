@@ -9,7 +9,7 @@ import json
 CHECKER_URL = 'http://164.125.7.61/speller/results'
 
 # 입력 파일과 출력 파일의 이름
-text_file = 'Code\Voice And Text\myInterview.txt'
+text_file = 'Voice And Text\myInterview.txt'
 
 # 입력 파일에서 텍스트 읽기
 with open(text_file, 'r', encoding='UTF-8') as file:

@@ -1,10 +1,10 @@
 # 오타 및 띄어쓰기 교정 프로그램
 # hanspell 오류로 더 이상 쓰지 않을 예정
 
-from hanspell import spell_checker
+from wordCorrect_hanspell import spell_checker
 import kss
 
-text_file = 'Code\Voice And Text\myInterview.txt'
+text_file = 'Voice And Text\myInterview.txt'
 
 # 파일 읽기
 with open(text_file, 'r', encoding='UTF-8') as file:
