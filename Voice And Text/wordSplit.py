@@ -72,6 +72,13 @@ for i, word in enumerate(word_list):
     else:
         pass
 
+    if '으로' in word:
+        # '으로' 기준
+        sub_list = word.split('으로') 
+        word_list[i:i+1] = sub_list
+    else:
+        pass
+
 # 출력 파일 열기 (덮어쓰기 모드)
 with open(text_file, 'w', encoding='UTF-8') as file:
     # 리스트 요소를 문자열로 결합하여 파일에 쓰기

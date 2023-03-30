@@ -137,7 +137,7 @@ with open(text_file, 'w', encoding='UTF-8') as file:
 # 부산대학교에서 제공해주는 맞춤법 교정기 사용하면, 스페이스 공백 뿐 만 아닌
 # '자료구조|자로구조' 와 같이 나오는 경우 존재
 # 스페이스 공백을 기준으로 먼저 list에 정렬한 후, 해당 list의 요소를 순회하여 '|'가 존재하면 '|'를 기준으로 또 나누는 프로그램
-# 정확한 keyword 추출을 위해서 동일한 방법으로 조사를 모두 제거하는 방향으로 프로그래밍 수행 (Line 143 ~ Line 215)
+# 정확한 keyword 추출을 위해서 동일한 방법으로 조사를 모두 제거하는 방향으로 프로그래밍 수행 (Line 143 ~ Line 223)
 
 # 입력 파일 열기
 with open(text_file, 'r', encoding='UTF-8') as file:
@@ -209,13 +209,21 @@ for i, word in enumerate(word_list):
     else:
         pass
 
+    if '으로' in word:
+        # '으로' 기준
+        sub_list = word.split('으로') 
+        word_list[i:i+1] = sub_list
+    else:
+        pass
+
+
 # 출력 파일 열기 (덮어쓰기 모드)
 with open(text_file, 'w', encoding='UTF-8') as file:
     # 리스트 요소를 문자열로 결합하여 파일에 쓰기
     file.write(' '.join(word_list))
 
 
-# 사용자사전 이용 : '데터베스' -> '데이터베이스'로 변환 예정 (Line 219 ~ Line 244)
+# 사용자사전 이용 : '데터베스' -> '데이터베이스'로 변환 예정 (Line 227 ~ Line 252)
 import pandas as pd
 
 excel_file = 'data_dictionary.xlsx' # Excel 파일 이름 : 사용자사전 파일 이름
@@ -244,7 +252,7 @@ with open(text_file, 'w', encoding='UTF-8') as file:
         file.write(line)
 
 
-# 가장 많이 언급되는 keyword를 내림차순으로 반환 (Line 249 ~ Line 274)
+# 가장 많이 언급되는 keyword를 내림차순으로 반환 (Line 257 ~ Line 282)
 
 # 파일 읽어오기
 with open(text_file, 'r', encoding='UTF-8') as file:
