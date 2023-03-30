@@ -42,7 +42,7 @@ while True:
         roi = np.expand_dims(roi, axis=0)
         
         # Emotion predict
-        preds = emotion_classifier.predict(roi)[0]
+        preds = emotion_classifier.predict(roi)[0] # tuple has no attribute *.predict 와 같이 에러 발생
         emotion_probability = np.max(preds)
         label = EMOTIONS[preds.argmax()]
         
