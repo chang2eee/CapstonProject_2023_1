@@ -96,16 +96,13 @@ def compareSpeakingVel():
 
 compareSpeakingVel()
 
-# 오타 교정 (Line 101 ~ Line 137)
+# 오타 교정 (Line 101 ~ Line 134)
 # 부산대학교 연구실에서 웹으로 작성한 프로그램 이용
 import requests
 import json
 
 # 한국어 맞춤법 검사기 API URL
 CHECKER_URL = 'http://164.125.7.61/speller/results'
-
-# 입력 파일과 출력 파일의 이름
-text_file = 'Voice And Text\myInterview.txt'
 
 # 입력 파일에서 텍스트 읽기
 with open(text_file, 'r', encoding='UTF-8') as file:
@@ -140,7 +137,7 @@ with open(text_file, 'w', encoding='UTF-8') as file:
 # 부산대학교에서 제공해주는 맞춤법 교정기 사용하면, 스페이스 공백 뿐 만 아닌
 # '자료구조|자로구조' 와 같이 나오는 경우 존재
 # 스페이스 공백을 기준으로 먼저 list에 정렬한 후, 해당 list의 요소를 순회하여 '|'가 존재하면 '|'를 기준으로 또 나누는 프로그램
-# 정확한 keyword 추출을 위해서 동일한 방법으로 조사를 모두 제거하는 방향으로 프로그래밍 수행 (Line 146 ~ Line 218)
+# 정확한 keyword 추출을 위해서 동일한 방법으로 조사를 모두 제거하는 방향으로 프로그래밍 수행 (Line 143 ~ Line 215)
 
 # 입력 파일 열기
 with open(text_file, 'r', encoding='UTF-8') as file:
@@ -218,7 +215,7 @@ with open(text_file, 'w', encoding='UTF-8') as file:
     file.write(' '.join(word_list))
 
 
-# 사용자사전 이용 : '데터베스' -> '데이터베이스'로 변환 예정 (Line 222 ~ Line 247)
+# 사용자사전 이용 : '데터베스' -> '데이터베이스'로 변환 예정 (Line 219 ~ Line 244)
 import pandas as pd
 
 excel_file = 'data_dictionary.xlsx' # Excel 파일 이름 : 사용자사전 파일 이름
@@ -247,7 +244,7 @@ with open(text_file, 'w', encoding='UTF-8') as file:
         file.write(line)
 
 
-# 가장 많이 언급되는 keyword를 내림차순으로 반환 (Line 252 ~ Line 277)
+# 가장 많이 언급되는 keyword를 내림차순으로 반환 (Line 249 ~ Line 274)
 
 # 파일 읽어오기
 with open(text_file, 'r', encoding='UTF-8') as file:
