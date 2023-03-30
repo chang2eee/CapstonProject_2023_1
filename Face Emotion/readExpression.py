@@ -2,10 +2,12 @@ import cv2
 import numpy as np   
 from keras.utils import img_to_array
 from keras.models import load_model
+import tensorflow as tf
 
 # Face detection XML load and trained model loading
-face_detection = cv2.CascadeClassifier('Face Emotion/haarcascade_frontalface_default.xml')
-emotion_classifier = load_model('Face Emotion/emotion_model.hdf5', compile=False) # 현재 UTF-8 에러 발생으로 실행 안됨
+face_detection = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+emotion_classifier = tf.keras.datasets.mnist.load_data('emotion_model.hdf5') 
+
 EMOTIONS = ["Angry" ,"Disgusting","Fearful", "Happy", "Sad", "Surpring", "Neutral"]
 
 # Video capture using webcam
