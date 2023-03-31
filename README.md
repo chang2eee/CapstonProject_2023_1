@@ -29,3 +29,5 @@ keras : 2.10.0
 imageio : 2.26.0
 
 scipy : 1.10.1
+
+moviepy : 1.0.3
