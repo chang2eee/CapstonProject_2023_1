@@ -3,10 +3,12 @@ import numpy as np
 from keras.utils import img_to_array
 from keras.models import load_model
 import tensorflow as tf
+import os
 
 # Face detection XML load and trained model loading
 face_detection = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-emotion_classifier = tf.keras.datasets.mnist.load_data('emotion_model.hdf5') 
+model_path = os.path.join(r'C:\Users\bbazz\OneDrive\바탕 화면\CapstonProject_2023_1\Face Emotion', 'emotion_model.hdf5')
+emotion_classifier = load_model(model_path) 
 
 EMOTIONS = ["Angry" ,"Disgusting","Fearful", "Happy", "Sad", "Surpring", "Neutral"]
 
