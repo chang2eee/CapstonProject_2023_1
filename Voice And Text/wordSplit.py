@@ -2,7 +2,7 @@
 # 스페이스 공백을 기준으로 먼저 list에 정렬한 후, 해당 list의 요소를 순회하여 '|'가 존재하면 '|'를 기준으로 또 나누는 프로그램
 # 정확한 keyword 추출을 위해서 조사를 모두 제거하는 방향으로 프로그래밍 수행
 
-text_file = 'Code\Voice And Text\myInterview.txt'
+text_file = 'Voice And Text\myInterview.txt'
 
 # 입력 파일 열기
 with open(text_file, 'r', encoding='UTF-8') as file:

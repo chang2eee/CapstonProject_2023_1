@@ -1,7 +1,7 @@
 import pandas as pd
 
-text_file = 'MyInterview.txt' # txt 파일 이름
-excel_file = 'data_dictionary.xlsx' # Excel 파일 이름
+text_file = 'Voice And Text\myInterview.txt' # txt 파일 이름
+excel_file = 'Voice And Text\data_dictionary.xlsx' # Excel 파일 이름
 
 df = pd.read_excel(excel_file, header=0) # 엑셀 파일 읽어오기
 target_words = df.iloc[:, 0].tolist() # 첫 번째 열 읽어오기 : 첫 번째 열에는 고칠 단어들이 들어있다.
