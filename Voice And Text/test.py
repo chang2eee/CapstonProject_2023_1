@@ -2,7 +2,7 @@
 
 # 순서 : 녹음 -> 글자 수 계산 -> 말하기 속도 비교 
 # -> 오타 교정 -> 문장 나누기(띄어쓰기, 조사)
-# -> (필요시) 사용자사전 이용  -> 키워드 찾기
+# -> (필요시) 사용자사전 이용(조사 삭제시 띄어쓰기 추가로 불필요)  -> 키워드 찾기
 
 # 경로 설정은 스스로 환경에 맞게 설정
 # 녹음과 오타 교정 시 인터넷 연결이 필요하니 연결 상태를 확인 요망
@@ -174,43 +174,46 @@ for i, word in enumerate(word_list):
 
     # '이'의 경우 : '데이터베이스'에서 이가 모두 사라지게 되어 '데터베스'로 변환
     # 사용자사전을 이용하여 다시 '데터베스'를 '데이터베이스'로 변환할 예정
-    if '이' in word:
-        # '이' 기준
+
+    # 조사 뒤에 띄어쓰기 추가로 더 이상 사용자사전을 사용하지 않아도 됨
+    # 이 방식으로 더 코드가 짧아지고 컴파일 시간 및 연동에서의 오류가 줄어들 것으로 예상됨
+    if '이 ' in word:
+        # '이 ' 기준
         sub_list = word.split('이') 
         word_list[i:i+1] = sub_list
     else:
         pass
 
-    if '가' in word:
-        # '가' 기준
+    if '가 ' in word:
+        # '가 ' 기준
         sub_list = word.split('가') 
         word_list[i:i+1] = sub_list
     else:
         pass
 
-    if '로' in word:
-        # '로' 기준
+    if '로 ' in word:
+        # '로 ' 기준
         sub_list = word.split('로') 
         word_list[i:i+1] = sub_list
     else:
         pass
 
-    if '의' in word:
-        # '의' 기준
+    if '의 ' in word:
+        # '의 ' 기준
         sub_list = word.split('의') 
         word_list[i:i+1] = sub_list
     else:
         pass
     
-    if '와' in word:
-        # '와' 기준
+    if '와 ' in word:
+        # '와 ' 기준
         sub_list = word.split('와') 
         word_list[i:i+1] = sub_list
     else:
         pass
 
-    if '으로' in word:
-        # '으로' 기준
+    if '으로 ' in word:
+        # '으로 ' 기준
         sub_list = word.split('으로') 
         word_list[i:i+1] = sub_list
     else:
@@ -223,36 +226,7 @@ with open(text_file, 'w', encoding='UTF-8') as file:
     file.write(' '.join(word_list))
 
 
-# 사용자사전 이용 : '데터베스' -> '데이터베이스'로 변환 예정 (Line 227 ~ Line 252)
-import pandas as pd
-
-excel_file = 'data_dictionary.xlsx' # Excel 파일 이름 : 사용자사전 파일 이름
-
-df = pd.read_excel(excel_file, header=0) # 엑셀 파일 읽어오기
-target_words = df.iloc[:, 0].tolist() # 첫 번째 열 읽어오기 : 첫 번째 열에 고칠 단어 위치
-corrected_words = df.iloc[:, 1].tolist() # 두 번째 열 읽어오기 : 첫 번째 열에 있는 단어들을 두 번째 열에 있는 단어들로 고침
-
-# txt 파일 읽기
-with open(text_file, "r", encoding="UTF-8") as file:
-    lines = file.readlines()
-
-# 저장한 새로운 list 만들기
-new_lines = []
-
-# txt 파일 수정
-for line in lines:
-    for i, target in enumerate(target_words):
-        corrected_target = corrected_words[i].strip()
-        line = line.replace(target, corrected_target)
-    new_lines.append(line)
-
-# txt 파일 다시 쓰기
-with open(text_file, 'w', encoding='UTF-8') as file:
-    for line in new_lines:
-        file.write(line)
-
-
-# 가장 많이 언급되는 keyword를 내림차순으로 반환 (Line 257 ~ Line 282)
+# 가장 많이 언급되는 keyword를 내림차순으로 반환 (Line 232 ~ Line 256)
 
 # 파일 읽어오기
 with open(text_file, 'r', encoding='UTF-8') as file:
